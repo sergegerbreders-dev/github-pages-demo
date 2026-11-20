@@ -1,0 +1,39 @@
+name: Deploy to GitHub Pages
+
+# WHEN to run: every push to the "main" branch
+on:
+  push:
+    branches: [main]
+
+# WHAT the workflow is allowed to do (principle of least privilege)
+permissions:
+  contents: read   # read the repo code
+  pages: write     # publish to GitHub Pages
+  id-token: write  # prove the deployment's identity to GitHub
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest   # GitHub spins up a fresh Linux machine for us
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # 1. Download the repo's code onto the machine
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      # 2. Prepare the Pages configuration
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      # 3. Package the site files (here: the whole repo root)
+      #    A real app would have a build step before this (npm run build, etc.)
+      - name: Upload site files
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      # 4. Publish the package to GitHub Pages
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
