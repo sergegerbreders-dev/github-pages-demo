@@ -9,7 +9,7 @@
       --bg: #f6f4ef;
       --card: #ffffff;
       --ink: #1f2430;
-      --accent: #2f6f4f;
+      --accent: #7d4a8d;
       --muted: #6b7280;
     }
     @media (prefers-color-scheme: dark) {
@@ -17,7 +17,7 @@
         --bg: #16181d;
         --card: #1f232b;
         --ink: #e8e6e1;
-        --accent: #7fc8a4;
+        --accent: #c9a0dc;
         --muted: #9aa0ab;
       }
     }
@@ -66,11 +66,15 @@
 <body>
   <main class="card">
     <h1>Deploy Diary</h1>
-    <span class="version">v1 — first deployment</span>
+    <span class="version">v2 — shipped via pull request</span>
     <p>
       This page was deployed straight from a git repository.
       Every <em>push</em> to the main branch rebuilds and republishes it
       automatically via GitHub Actions.
+    </p>
+    <p>
+      This version arrived through a feature branch and a reviewed
+      pull request — the way teams ship for real.
     </p>
     <p>You have pressed the button <span id="count">0</span> times on this device.</p>
     <button id="btn">Press me</button>
